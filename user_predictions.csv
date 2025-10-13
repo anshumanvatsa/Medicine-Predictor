@@ -1,0 +1,6 @@
+Patient_ID, Age, Sex, Weight_kg, Height_cm, BMI, Ethnicity, Comorbidities,Unnamed: 8,Adverse_Reaction_Predicted,Reaction_Type_Predicted
+Known_Allergies, Previous_Adverse_Reactions, Current_Medications, Herbal_Supplements,,,,,,0,7
+Alcohol_Use, Smoking_Status, Creatinine_mg_dL, eGFR_mL_min, ALT_U_L, AST_U_L,,,,0,7
+Bilirubin_mg_dL, Hemoglobin_g_dL, QTc_ms, CYP2D6_status, CYP2C19_status,,,,,0,7
+HLA_B_5701, Other_Genetic_Risks, Drug_Name, Drug_Dose_mg, Drug_Route,,,,,0,7
+Drug_Frequency, Adverse_Reaction, Reaction_Type,,,,,,,0,7
