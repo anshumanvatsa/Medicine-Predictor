@@ -33,11 +33,12 @@ pipeline {
           set -e
           . ${VENV}/bin/activate
 
-          # Run Streamlit app on port 8000, accessible publicly
-          nohup streamlit run app.py --server.port 8000 --server.address 0.0.0.0 > app.log 2>&1 &
+          # Kill any existing Streamlit process
+          pkill -f "streamlit run app.py" || true
 
-          echo $! > app.pid
-          sleep 3
+          # Start Streamlit and detach it so Jenkins doesn't kill it
+          nohup streamlit run app.py --server.port 8000 --server.address 0.0.0.0 > app.log 2>&1 & disown
+
           echo "App started. Visit: http://$(curl -s http://checkip.amazonaws.com):8000/"
         '''
       }
