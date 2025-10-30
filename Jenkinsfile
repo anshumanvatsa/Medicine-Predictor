@@ -33,9 +33,8 @@ pipeline {
           set -e
           . ${VENV}/bin/activate
 
-          # If your app.py contains Flask and uses `flask run`, this exposes it publicly:
-          export FLASK_APP=app.py
-          nohup ${PYTHON} -m flask run --host=0.0.0.0 --port=8000 > app.log 2>&1 &
+          # Run Streamlit app on port 8000, accessible publicly
+          nohup streamlit run app.py --server.port 8000 --server.address 0.0.0.0 > app.log 2>&1 &
 
           echo $! > app.pid
           sleep 3
