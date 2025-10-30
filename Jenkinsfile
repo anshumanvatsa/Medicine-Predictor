@@ -36,9 +36,11 @@ pipeline {
           # Kill any existing Streamlit process
           pkill -f "streamlit run app.py" || true
 
-          # Start Streamlit and detach it so Jenkins doesn't kill it
-          nohup streamlit run app.py --server.port 8000 --server.address 0.0.0.0 > app.log 2>&1 & disown
+          # Start Streamlit in background and detach from Jenkins
+          nohup streamlit run app.py --server.port 8000 --server.address 0.0.0.0 > app.log 2>&1 &
 
+          echo $! > app.pid
+          sleep 3
           echo "App started. Visit: http://$(curl -s http://checkip.amazonaws.com):8000/"
         '''
       }
