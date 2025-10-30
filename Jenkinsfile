@@ -27,24 +27,25 @@ pipeline {
       }
     }
 
-    stage('Run') {
-      steps {
-        sh '''
-          set -e
-          . ${VENV}/bin/activate
+   stage('Run') {
+  steps {
+    sh '''
+      set -e
+      . ${VENV}/bin/activate
 
-          # Kill any existing Streamlit process
-          pkill -f "streamlit run app.py" || true
+      # Kill any existing Streamlit process
+      pkill -f "streamlit run app.py" || true
 
-          # Start Streamlit in background and detach from Jenkins
-          nohup streamlit run app.py --server.port 8000 --server.address 0.0.0.0 > app.log 2>&1 &
+      # Run Streamlit in headless mode & keep detached
+      nohup streamlit run app.py --server.port 8000 --server.address 0.0.0.0 --server.headless true > app.log 2>&1 &
 
-          echo $! > app.pid
-          sleep 3
-          echo "App started. Visit: http://$(curl -s http://checkip.amazonaws.com):8000/"
-        '''
-      }
-    }
+      echo $! > app.pid
+      sleep 5
+      echo "App started. Visit: http://$(curl -s http://checkip.amazonaws.com):8000/"
+    '''
+  }
+}
+
   }
 
   post {
