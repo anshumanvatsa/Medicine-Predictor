@@ -1,1 +1,3 @@
-Flask
+streamlit
+# keep Flask if you still need it elsewhere, otherwise you can remove it
+# Flask
